@@ -12,14 +12,21 @@ spring:
               enabled: true
           routes:
             - id: order-client
-              uri: lb://order-client
+              uri: http://localhost:19092
               predicates:
                   - Path=/orders/**
 
-            - id: product-client
-              uri: lb://product-client
+            - id: product-client-1
+              uri: http://localhost:19093
               predicates:
                   - Path=/products/**
+                  - Weight=group-product-api, 7
+
+            - id: product-client-2
+              uri: http://localhost:19094
+              predicates:
+                - Path=/products/**
+                - Weight=group-product-api, 3
 
             - id: auth-client
               uri: lb://auth-client
