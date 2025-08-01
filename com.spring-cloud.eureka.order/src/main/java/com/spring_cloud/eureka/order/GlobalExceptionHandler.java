@@ -68,7 +68,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ApiResponse<?> handleGeneralException(Exception ex) {
         log.error("Unhandled exception: ", ex);
-        return ApiResponse.error(500, "예기치 못한 서버 오류가 발생했습니다.");
+        return ApiResponse.error(500, ex.getMessage());
     }
 
 

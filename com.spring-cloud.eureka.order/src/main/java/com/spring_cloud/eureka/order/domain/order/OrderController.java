@@ -23,10 +23,12 @@ public class OrderController {
 
     }
 
-    @PostMapping("/orders?fail")
+    @PostMapping("/orders/fail")
     public ApiResponse<?> failOrder(){
+        orderService.addOrderFailed();
         //TODO : 상품 API 호출 실패 케이스를 만들어서 fallback 처리 후, Response에 잠시 후에 주문 추가를 요청 해주세요. 메시지를 전달해 주세요.
-        return ApiResponse.error(400,"실패");
+        //원래 200이 뜨는지?..
+        return ApiResponse.error(400,"잠시 후에 주문 추가를 요청해주세요.");
     }
 
     @PutMapping("/orders/{orderId}")
