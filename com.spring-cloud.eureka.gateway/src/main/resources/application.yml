@@ -5,26 +5,26 @@ spring:
     web-application-type: reactive
   cloud:
     gateway:
-      discovery:
-        locator:
-          enabled: true
       server:
         webflux:
+          discovery:
+            locator:
+              enabled: true
           routes:
             - id: order-client
-              uri : lb://order-client
+              uri: lb://order-client
               predicates:
-                - Path=/order/**
+                  - Path=/order/**
 
             - id: product-client
               uri: lb://product-client
               predicates:
-                - Path=/product/**
+                  - Path=/products/**
 
             - id: auth-client
               uri: lb://auth-client
               predicates:
-                - Path=/auth/**
+                  - Path=/auth/**
 
 server:
   port: 19091
@@ -32,4 +32,9 @@ eureka:
   client:
     service-url:
       defaultZone: http://localhost:19090/eureka
+
+service:
+  jwt:
+    access-expiration: 3600000
+    secret-key: "401b09eab3c013d4ca54922bb802bec8fd5318192b0a75f201d8b3727429080fb337591abd3e44453b954555b7a0812e1081c39b740293f765eae731f5a65ed1"
 
