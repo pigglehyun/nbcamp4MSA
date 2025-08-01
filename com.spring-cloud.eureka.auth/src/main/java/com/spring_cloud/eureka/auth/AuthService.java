@@ -50,11 +50,4 @@ public class AuthService {
         return userRepository.findUserByEmail(email).orElseThrow(() -> new NotFoundException("유저 없음"));
     }
 
-
 }
-
-
-//1. 아까 말씀하신 도메인별로 DB가 나눠져있어서 서로서로 호출한다고 하셨는데 FeignClient 말씀하신게 맞는지
-//2. Order->Product를 사용하면 이제 실제 product에 있는 메서드가 호출되는데
-//그 메서드에서 response 이랑 똑같이 반환.
-//그럼 만약에 Product 객체를 반환하는 메서드를 호출하면 Order서 어떻게 사용?.. Product 엔티티가 없는데.
