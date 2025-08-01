@@ -15,18 +15,18 @@ public class ProductController {
     private final ProductService productService;
 
     @PostMapping("/products")
-    public ResponseDTO addProduct(@RequestBody RequestDTO requestDTO) {
-        return productService.addProduct(requestDTO);
+    public ApiResponse<?> addProduct(@RequestBody RequestDTO requestDTO) {
+        return ApiResponse.success(productService.addProduct(requestDTO));
     }
 
     @GetMapping("/products")
-    public List<ResponseDTO> getProducts(){
-        return productService.getProducts();
+    public ApiResponse<?> getProducts(){
+        return ApiResponse.success(productService.getProducts());
     }
 
     @GetMapping("/products/{productId}")
-    public ResponseDTO getProduct(@PathVariable(name = "productId") Long productId){
-        return productService.getProduct(productId);
+    public ApiResponse<?> getProduct(@PathVariable(name = "productId") Long productId){
+        return ApiResponse.success(productService.getProduct(productId));
     }
 
 }

@@ -39,7 +39,7 @@ public class AuthService {
     public void signUp(SignUpRequestDTO requestDTO) throws Exception {
         //이미 가입된 유저라면 회원가입 거부
         if (userRepository.findUserByEmail(requestDTO.email()).isPresent()) {
-            throw new IllegalAccessException("이미 가입된 이메일");
+            throw new IllegalArgumentException("이미 가입된 이메일이 존재합니다.");
         }
         String encodedPassword = passwordEncoder.encode(requestDTO.password());
         User user = new User(requestDTO.email(), requestDTO.username(), encodedPassword);
@@ -47,7 +47,7 @@ public class AuthService {
     }
 
     private User findUserByEmail(String email) {
-        return userRepository.findUserByEmail(email).orElseThrow(() -> new NotFoundException("유저 없음"));
+        return userRepository.findUserByEmail(email).orElseThrow(() -> new NotFoundException("존재 하지 않는 사용자입니다."));
     }
 
 }

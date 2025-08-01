@@ -19,13 +19,13 @@ public class AuthController {
     private final AuthService authService;
 
     @PostMapping("/auth/sign-in")
-    public ResponseDTO signIn(@RequestBody SignInRequestDTO requestDTO) throws AuthException {
-        return authService.signIn(requestDTO);
+    public ApiResponse<?> signIn(@RequestBody SignInRequestDTO requestDTO) throws AuthException {
+        return ApiResponse.success(authService.signIn(requestDTO));
     }
 
     @PostMapping("/auth/sign-up")
-    public ResponseEntity<?> signUp(@RequestBody @Valid SignUpRequestDTO requestDTO) throws Exception {
+    public ApiResponse<?> signUp(@RequestBody @Valid SignUpRequestDTO requestDTO) throws Exception {
         authService.signUp(requestDTO);
-        return ResponseEntity.ok(Map.of("message", "회원가입 완료"));
+        return ApiResponse.success("회원가입 완료");
     }
 }

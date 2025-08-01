@@ -46,8 +46,7 @@ public class OrderService {
     }
 
     private Order findOrderById(Long id) {
-        return orderRepository.findById(id).orElseThrow(() -> new NotFoundException("없음"));
+        return orderRepository.findById(id).orElseThrow(() -> new NotFoundException("존재하지 않는 주문입니다."));
     }
-
 
 }

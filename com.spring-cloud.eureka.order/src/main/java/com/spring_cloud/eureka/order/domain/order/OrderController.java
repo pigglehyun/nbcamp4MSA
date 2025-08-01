@@ -1,6 +1,7 @@
 package com.spring_cloud.eureka.order.domain.order;
 
 
+import com.spring_cloud.eureka.order.ApiResponse;
 import com.spring_cloud.eureka.order.domain.DTO.OrderRequestDTO;
 import com.spring_cloud.eureka.order.domain.DTO.OrderResponseDTO;
 import lombok.RequiredArgsConstructor;
@@ -16,25 +17,26 @@ public class OrderController {
     private final OrderService orderService;
 
     @PostMapping("/orders")
-    public OrderResponseDTO addOrder(){
-        return orderService.addOrder();
+    public ApiResponse<?> addOrder(){
+        orderService.addOrder();
+        return ApiResponse.success("주문 추가 완료");
 
     }
 
     @PostMapping("/orders?fail")
-    public void failOrder(){
+    public ApiResponse<?> failOrder(){
         //TODO : 상품 API 호출 실패 케이스를 만들어서 fallback 처리 후, Response에 잠시 후에 주문 추가를 요청 해주세요. 메시지를 전달해 주세요.
-
+        return ApiResponse.error(400,"실패");
     }
 
     @PutMapping("/orders/{orderId}")
-    public ResponseEntity<?> addProduct(@PathVariable(name = "orderId") Long orderId, @RequestBody OrderRequestDTO orderRequestDTO){
+    public ApiResponse<?> addProduct(@PathVariable(name = "orderId") Long orderId, @RequestBody OrderRequestDTO orderRequestDTO){
         orderService.addProduct(orderId, orderRequestDTO);
-        return ResponseEntity.ok(Map.of("message", orderId + "번 주문 " + orderRequestDTO.productId()+"번 상품 추가 완료"));
+        return ApiResponse.success(orderRequestDTO);
     }
 
     @GetMapping("/orders/{orderId}")
-    public OrderResponseDTO getOrder(@PathVariable(name = "orderId") Long orderId){
-        return orderService.getOrder(orderId);
+    public ApiResponse<?> getOrder(@PathVariable(name = "orderId") Long orderId){
+        return ApiResponse.success(orderService.getOrder(orderId));
     }
 }
