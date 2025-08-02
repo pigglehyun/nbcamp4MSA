@@ -11,6 +11,7 @@ import jakarta.annotation.PostConstruct;
 import jakarta.ws.rs.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -62,6 +63,7 @@ public class OrderService {
         //
     }
 
+    @Cacheable(value = "Order", key = "#p0") // 첫 번째 인자
     public OrderResponseDTO getOrder(Long id) {
         Order order = findOrderById(id);
         List<Long> productList = order.getProductIds().stream().map(OrderLine::getProduct_id).toList();

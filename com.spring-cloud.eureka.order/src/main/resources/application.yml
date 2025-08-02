@@ -10,6 +10,13 @@ spring:
     hibernate:
       ddl-auto: update
     generate-ddl: true
+  data:
+    redis:
+      host: default
+      port: 6379
+      ssl:
+        enabled: true
+
 
 
 server:
