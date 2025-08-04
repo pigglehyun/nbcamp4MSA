@@ -26,7 +26,7 @@
 
 ### ✏️링크
 
-[NOTION](https://www.notion.so/Project-17d07e8b59d98034a4d4fb8d3902bde2)
+[NOTION](https://sharp-houseboat-a45.notion.site/MSA-24134f9f370b80748257c06f3a3068bc?source=copy_link)
 
 </br>
 
